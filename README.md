@@ -1,42 +1,19 @@
+Potential Future Setting Options
+ - Block entire domain or just the specific page in the Contro Intelligent Flow Interception. Do this on case by case, e.g blocked = {"link.com", true} - true being whether its the domain or not
+ - Serverhop type (default/gta)
+ - Hook Specific Functions to reduce the need for external scripts
+ 
+--]]
 
-
-
--- Copy Discord invite to clipboard on start
--- Place this at the top of your startup script (or run once on load)
-
-pcall(function()
-	local invite = "https://discord.gg/idk"
-
-	-- Common executors provide setclipboard()
-	if type(setclipboard) == "function" then
-		setclipboard(invite)
-		return
-	end
-
-	-- Some environments expose a global in getgenv()
-	if type(getgenv) == "function" and type(getgenv().setclipboard) == "function" then
-		pcall(getgenv().setclipboard, invite)
-		return
-	end
-
-	-- If the surrounding script saved the original clipboard function as `originalSetClipboard`
-	if type(originalSetClipboard) == "function" then
-		pcall(originalSetClipboard, invite)
-		return
-	end
-
-	-- Fallback: print the invite so you can copy it manually if clipboard is unavailable
-	print("Clipboard function not available. Invite:", invite)
-end)
-
-
-
+-- Ensure the game is loaded 
 if not game:IsLoaded() then
 	game.Loaded:Wait()
-	
 end
-local Pro = true -- I AM STEVE!
 
+-- Check License Tier
+local Pro = true -- We're open sourced now!
+
+-- Create Variables for Roblox Services
 local coreGui = game:GetService("CoreGui")
 local httpService = game:GetService("HttpService")
 local lighting = game:GetService("Lighting")
@@ -51,6 +28,7 @@ local tweenService = game:GetService("TweenService")
 local userInputService = game:GetService('UserInputService')
 local gameSettings = UserSettings():GetService("UserGameSettings")
 
+-- Variables
 local camera = workspace.CurrentCamera
 local getMessage = replicatedStorage:WaitForChild("DefaultChatSystemChatEvents", 1) and replicatedStorage.DefaultChatSystemChatEvents:WaitForChild("OnMessageDoneFiltering", 1)
 local localPlayer = players.LocalPlayer
@@ -76,11 +54,12 @@ local creatorType = game.CreatorType
 local espContainer = Instance.new("Folder", gethui and gethui() or coreGui)
 local oldVolume = gameSettings.MasterVolume
 
-local siriusValues = {
-	siriusVersion = "1.26",
-	siriusName = "Sirius",
+-- Configurable Core Values
+local controValues = {
+	controVersion = "1.26",
+	controName = "Contro",
 	releaseType = "Stable",
-	siriusFolder = "Sirius",
+	controFolder = "Contro",
 	settingsFile = "settings.srs",
 	interfaceAsset = 14183548964,
 	cdn = "https://cdn.sirius.menu/SIRIUS-SCRIPT-CORE-ASSETS/",
@@ -88,11 +67,11 @@ local siriusValues = {
 	enableExperienceSync = false, -- Games are no longer available due to a lack of whitelisting, they may be made open source at a later date, however they are patched as of now and are useless to the end user. Turning this on may introduce "fake functionality".
 	games = {
 		BreakingPoint = {
-			name = "I AM STEVE",
-			description = "Players buy chickens, WE MAKE THE CHICKENS",
+			name = "Breaking Point",
+			description = "Players are seated around a table. Their only goal? To be the last one standing. Execute this script to gain an unfair advantage.",
 			id = 648362523,
 			enabled = true,
-			raw = "idk",
+			raw = "BreakingPoint",
 			minimumTier = "Free",
 		},
 		MurderMystery2 = {
@@ -105,7 +84,7 @@ local siriusValues = {
 		},
 		TowerOfHell = {
 			name = "Tower Of Hell",
-			description = "A difficult popular parkouring game, with random levels and modifiers. Try it :)",
+			description = "A difficult popular parkouring game, with random levels and modifiers. Execute this script to gain an unfair advantage.",
 			id = 1962086868,
 			enabled = true,
 			raw = "TowerOfHell",
@@ -113,7 +92,7 @@ local siriusValues = {
 		},
 		Strucid = {
 			name = "Strucid",
-			description = "Fight friends and enemies in Strucid with building mechanics! Try it :).",
+			description = "Fight friends and enemies in Strucid with building mechanics! Execute this script to gain an unfair advantage.",
 			id = 2377868063,
 			enabled = true,
 			raw = "Strucid",
@@ -121,7 +100,7 @@ local siriusValues = {
 		},
 		PhantomForces = {
 			name = "Phantom Forces",
-			description = "One of the most popular FPS shooters from the team at StyLiS Studios. Try it :)",
+			description = "One of the most popular FPS shooters from the team at StyLiS Studios. Execute this script to gain an unfair advantage.",
 			id = 292439477,
 			enabled = true,
 			raw = "PhantomForces",
@@ -134,8 +113,8 @@ local siriusValues = {
 	executors = {"synapse x", "script-ware", "krnl", "scriptware", "comet", "valyse", "fluxus", "electron", "hydrogen"},
 	disconnectTypes = { {"ban", {"ban", "perm"}}, {"network", {"internet connection", "network"}} },
 	nameGeneration = {
-		adjectives = {"Cool", "Awesome", "Epic", "Ninja", "Super", "Mystic", "Swift", "Golden", "Diamond", "Silver", "OP", "Roblox", "C00L"},
-		nouns = {"Player", "Gamer", "Master", "Legend", "o", "Hacker", "CHEATER", "Champion"}
+		adjectives = {"Cool", "Awesome", "Epic", "Ninja", "Super", "Mystic", "Swift", "Golden", "Diamond", "Silver", "Mint", "Roblox", "Amazing"},
+		nouns = {"Player", "Gamer", "Master", "Legend", "Hero", "Ninja", "Wizard", "Champion", "Warrior", "Sorcerer"}
 	},
 	administratorRoles = {"mod","admin","staff","dev","founder","owner","supervis","manager","management","executive","president","chairman","chairwoman","chairperson","director"},
 	transparencyProperties = {
@@ -152,7 +131,7 @@ local siriusValues = {
 	chatSpy = {
 		enabled = true,
 		visual = {
-			Color = Color3.fromRGB(26, 148, 255),
+			Color = Color3.fromRGB(255, 148, 26),
 			Font = Enum.Font.SourceSansBold,
 			TextSize = 18
 		},
@@ -161,15 +140,15 @@ local siriusValues = {
 		recentPings = {},
 		adaptiveBaselinePings = {},
 		pingNotificationCooldown = 0,
-		maxSamples = 120,
-		spikeThreshold = 1.75,
-		adaptiveBaselineSamples = 30, 
-		adaptiveHighPingThreshold = 120 
+		maxSamples = 12, -- max num of recent pings stored
+		spikeThreshold = 1.75, -- high Ping in comparison to average ping (e.g 100 avg would be high at 150)
+		adaptiveBaselineSamples = 30, -- how many samples Contro takes before deciding on a fixed high ping value
+		adaptiveHighPingThreshold = 120 -- default value
 	},
 	frameProfile = {
 		frameNotificationCooldown = 0,
 		fpsQueueSize = 10,
-		lowFPSThreshold = 20,
+		lowFPSThreshold = 20, -- what's low fps!??!?!
 		totalFPS = 0,
 		fpsQueue = {},
 	},
@@ -177,15 +156,15 @@ local siriusValues = {
 		{
 			name = "Noclip",
 			images = {14385986465, 9134787693},
-			color = Color3.fromRGB(0, 170, 127),
+			color = Color3.fromRGB(127, 170, 0),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function() end,
 		},
 		{
-			name = "Fly",
+			name = "Flight",
 			images = {9134755504, 14385992605},
-			color = Color3.fromRGB(170, 37, 46),
+			color = Color3.fromRGB(46, 37, 170),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -199,7 +178,7 @@ local siriusValues = {
 		{
 			name = "Refresh",
 			images = {9134761478, 9134761478},
-			color = Color3.fromRGB(61, 179, 98),
+			color = Color3.fromRGB(98, 179, 61),
 			enabled = false,
 			rotateWhileEnabled = true,
 			disableAfter = 3,
@@ -219,9 +198,9 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Re-spawn",
+			name = "Respawn",
 			images = {9134762943, 9134762943},
-			color = Color3.fromRGB(49, 88, 193),
+			color = Color3.fromRGB(193, 88, 49),
 			enabled = false,
 			rotateWhileEnabled = true,
 			disableAfter = 2,
@@ -234,17 +213,17 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Can't die",
+			name = "Invulnerability",
 			images = {9134765994, 14386216487},
-			color = Color3.fromRGB(193, 46, 90),
+			color = Color3.fromRGB(90, 46, 193),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function() end,
 		},
 		{
-			name = "Kill PPL",
+			name = "Fling",
 			images = {9134785384, 14386226155},
-			color = Color3.fromRGB(184, 85, 61),
+			color = Color3.fromRGB(61, 85, 184),
 			enabled = false,
 			rotateWhileEnabled = true,
 			callback = function(value)
@@ -269,9 +248,9 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Perception",
+			name = "Extrasensory Perception",
 			images = {9134780101, 14386232387},
-			color = Color3.fromRGB(214, 182, 19),
+			color = Color3.fromRGB(19, 182, 214),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -281,9 +260,9 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Day-Night",
+			name = "Night and Day",
 			images = {9134778004, 10137794784},
-			color = Color3.fromRGB(102, 75, 190),
+			color = Color3.fromRGB(190, 75, 102),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -291,9 +270,9 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Audio",
+			name = "Global Audio",
 			images = {9134774810, 14386246782},
-			color = Color3.fromRGB(202, 103, 58),
+			color = Color3.fromRGB(58, 103, 202),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -308,7 +287,7 @@ local siriusValues = {
 		{
 			name = "Visibility",
 			images = {14386256326, 9134770786},
-			color = Color3.fromRGB(62, 94, 170),
+			color = Color3.fromRGB(170, 94, 62),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function() end,
@@ -316,8 +295,8 @@ local siriusValues = {
 	},
 	sliders = {
 		{
-			name = "Speed",
-			color = Color3.fromRGB(44, 153, 93),
+			name = "player speed",
+			color = Color3.fromRGB(93, 153, 44),
 			values = {0, 300},
 			default = 16,
 			value = 16,
@@ -331,8 +310,8 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Jump power",
-			color = Color3.fromRGB(59, 126, 184),
+			name = "jump power",
+			color = Color3.fromRGB(184, 126, 59),
 			values = {0, 350},
 			default = 50,
 			value = 16,
@@ -350,8 +329,8 @@ local siriusValues = {
 			end,
 		},
 		{
-			name = "Fly speed",
-			color = Color3.fromRGB(177, 45, 45),
+			name = "flight speed",
+			color = Color3.fromRGB(45, 45, 177),
 			values = {1, 25},
 			default = 3,
 			value = 3,
@@ -359,8 +338,8 @@ local siriusValues = {
 			callback = function(value) end,
 		},
 		{
-			name = "View",
-			color = Color3.fromRGB(198, 178, 75),
+			name = "field of view",
+			color = Color3.fromRGB(75, 178, 198),
 			values = {45, 120},
 			default = 70,
 			value = 16,
@@ -372,11 +351,11 @@ local siriusValues = {
 	}
 }
 
-local siriusSettings = {
+local controSettings = {
 	{
 		name = 'General',
-		description = 'The general settings for Contro, from simple to VERY COMPLEX features.',
-		color = Color3.new(0.117647, 0.490196, 0.72549),
+		description = 'The general settings for Contro, from simple to unique features.',
+		color = Color3.new(0.72549, 0.490196, 0.117647),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -405,7 +384,7 @@ local siriusSettings = {
 			},
 			{
 				name = 'Now Playing Notifications',
-				description = 'When active, Sirius will notify you when the next song in your Music queue plays.',
+				description = 'When active, Contro will notify you when the next song in your Music queue plays.',
 				settingType = 'Boolean',
 				current = true,
 
@@ -442,11 +421,11 @@ local siriusSettings = {
 			},
 			{
 				name = 'Client-Based Anti Kick',
-				description = 'Cancel any kick request involving you sent by the client. This may prompt detection from Adonis or similar anti-cheats. You will need to rejoin and re-run Sirius to toggle.',
+				description = 'Cancel any kick request involving you sent by the client. This may prompt detection from Adonis or similar anti-cheats. You will need to rejoin and re-run Contro to toggle.',
 				settingType = 'Boolean',
 				current = false,
 
-				id = 'Nokick'
+				id = 'antikick'
 			},
 			{
 				name = 'Muffle audio while unfocused',
@@ -459,8 +438,8 @@ local siriusSettings = {
 	},
 	{
 		name = 'Keybinds',
-		description = 'Assign keybinds to actionssuch as the one to open/close Contro.',
-		color = Color3.new(0.0941176, 0.686275, 0.509804),
+		description = 'Assign keybinds to actions or change keybinds such as the one to open/close Contro.',
+		color = Color3.new(0.509804, 0.686275, 0.0941176),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -481,7 +460,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'noclip',
 				callback = function()
-					local noclip = siriusValues.actions[1]
+					local noclip = controValues.actions[1]
 					noclip.enabled = not noclip.enabled
 					noclip.callback(noclip.enabled)
 				end
@@ -492,7 +471,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'flight',
 				callback = function()
-					local flight = siriusValues.actions[2]
+					local flight = controValues.actions[2]
 					flight.enabled = not flight.enabled
 					flight.callback(flight.enabled)
 				end
@@ -503,7 +482,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'refresh',
 				callback = function()
-					local refresh = siriusValues.actions[3]
+					local refresh = controValues.actions[3]
 					if not refresh.enabled then
 						refresh.enabled = true
 						refresh.callback()
@@ -516,7 +495,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'respawn',
 				callback = function()
-					local respawn = siriusValues.actions[4]
+					local respawn = controValues.actions[4]
 					if not respawn.enabled then
 						respawn.enabled = true
 						respawn.callback()
@@ -529,7 +508,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'invulnerability',
 				callback = function()
-					local invulnerability = siriusValues.actions[5]
+					local invulnerability = controValues.actions[5]
 					invulnerability.enabled = not invulnerability.enabled
 					invulnerability.callback(invulnerability.enabled)
 				end
@@ -540,7 +519,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'fling',
 				callback = function()
-					local fling = siriusValues.actions[6]
+					local fling = controValues.actions[6]
 					fling.enabled = not fling.enabled
 					fling.callback(fling.enabled)
 				end
@@ -551,7 +530,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'esp',
 				callback = function()
-					local esp = siriusValues.actions[7]
+					local esp = controValues.actions[7]
 					esp.enabled = not esp.enabled
 					esp.callback(esp.enabled)
 				end
@@ -562,7 +541,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'nightandday',
 				callback = function()
-					local nightandday = siriusValues.actions[8]
+					local nightandday = controValues.actions[8]
 					nightandday.enabled = not nightandday.enabled
 					nightandday.callback(nightandday.enabled)
 				end
@@ -573,7 +552,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'globalaudio',
 				callback = function()
-					local globalaudio = siriusValues.actions[9]
+					local globalaudio = controValues.actions[9]
 					globalaudio.enabled = not globalaudio.enabled
 					globalaudio.callback(globalaudio.enabled)
 				end
@@ -584,7 +563,7 @@ local siriusSettings = {
 				current = nil,
 				id = 'visibility',
 				callback = function()
-					local visibility = siriusValues.actions[10]
+					local visibility = controValues.actions[10]
 					visibility.enabled = not visibility.enabled
 					visibility.callback(visibility.enabled)
 				end
@@ -593,8 +572,8 @@ local siriusSettings = {
 	},
 	{
 		name = 'Performance',
-		description = 'Tweak and test your performance settings for Roblox in Sirius.',
-		color = Color3.new(1, 0.376471, 0.168627),
+		description = 'Tweak and test your performance settings for Roblox in Contro.',
+		color = Color3.new(0.168627, 0.376471, 1.0),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -635,7 +614,7 @@ local siriusSettings = {
 	{
 		name = 'Detections',
 		description = 'Contro detects and prevents anything malicious or possibly harmful to your wellbeing.',
-		color = Color3.new(0.705882, 0, 0),
+		color = Color3.new(0.0, 0.0, 0.705882),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -689,7 +668,7 @@ local siriusSettings = {
 	{
 		name = 'Logging',
 		description = 'Send logs to your specified webhook URL of things like player joins and leaves and messages.',
-		color = Color3.new(0.905882, 0.780392, 0.0666667),
+		color = Color3.new(0.0666667, 0.780392, 0.905882),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -728,22 +707,25 @@ local siriusSettings = {
 	},
 }
 
-local randomAdjective = siriusValues.nameGeneration.adjectives[math.random(1, #siriusValues.nameGeneration.adjectives)]
-local randomNoun = siriusValues.nameGeneration.nouns[math.random(1, #siriusValues.nameGeneration.nouns)]
+-- Generate random username
+local randomAdjective = controValues.nameGeneration.adjectives[math.random(1, #controValues.nameGeneration.adjectives)]
+local randomNoun = controValues.nameGeneration.nouns[math.random(1, #controValues.nameGeneration.nouns)]
 local randomNumber = math.random(100, 3999) -- You can customize the range
 local randomUsername = randomAdjective .. randomNoun .. randomNumber
 
+-- Initialise Contro Client Interface
 local guiParent = gethui and gethui() or coreGui
-local sirius = guiParent:FindFirstChild("Sirius")
-if sirius then
-	sirius:Destroy()
+local contro = guiParent:FindFirstChild("Contro")
+if contro then
+	contro:Destroy()
 end
 
-local UI = game:GetObjects('rbxassetid://'..siriusValues.interfaceAsset)[1]
-UI.Name = siriusValues.siriusName
+local UI = game:GetObjects('rbxassetid://'..controValues.interfaceAsset)[1]
+UI.Name = controValues.controName
 UI.Parent = guiParent
 UI.Enabled = false
 
+-- Create Variables for Interface Elements
 local characterPanel = UI.Character
 local customScriptPrompt = UI.CustomScriptPrompt
 local securityPrompt = UI.SecurityPrompt
@@ -773,15 +755,18 @@ local originalSetClipboard = getgenv()[indexSetClipboard]
 local index = http_request and "http_request" or "request"
 local originalRequest = getgenv()[index]
 
+-- put this into controValues, like the fps and ping shit
 local suppressedSounds = {}
 local soundSuppressionNotificationCooldown = 0
 local soundInstances = {}
 local cachedIds = {}
 local cachedText = {}
 
-if not getMessage then siriusValues.chatSpy.enabled = false end
+if not getMessage then controValues.chatSpy.enabled = false end
 
+-- Call External Modules
 
+-- httpRequest
 local httpRequest = originalRequest
 
 -- Neon Module
@@ -1012,21 +997,22 @@ local httpRequest = originalRequest
 
 --end)()
 
+-- Contro Functions
 local function checkSirius() return UI.Parent end
 local function getPing() return math.clamp(statsService.Network.ServerStatsItem["Data Ping"]:GetValue(), 10, 700) end
-local function checkFolder() if isfolder then if not isfolder(siriusValues.siriusFolder) then makefolder(siriusValues.siriusFolder) end if not isfolder(siriusValues.siriusFolder.."/Music") then makefolder(siriusValues.siriusFolder.."/Music") writefile(siriusValues.siriusFolder.."/Music/readme.txt", "Hey there! Place your MP3 or other audio files in this folder, and have the ability to play them through the Sirius Music UI!") end if not isfolder(siriusValues.siriusFolder.."/Assets/Icons") then makefolder(siriusValues.siriusFolder.."/Assets/Icons") end if not isfolder(siriusValues.siriusFolder.."/Assets") then makefolder(siriusValues.siriusFolder.."/Assets") end end end
+local function checkFolder() if isfolder then if not isfolder(controValues.controFolder) then makefolder(controValues.controFolder) end if not isfolder(controValues.controFolder.."/Music") then makefolder(controValues.controFolder.."/Music") writefile(controValues.controFolder.."/Music/readme.txt", "Hey there! Place your MP3 or other audio files in this folder, and have the ability to play them through the Contro Music UI!") end if not isfolder(controValues.controFolder.."/Assets/Icons") then makefolder(controValues.controFolder.."/Assets/Icons") end if not isfolder(controValues.controFolder.."/Assets") then makefolder(controValues.controFolder.."/Assets") end end end
 local function isPanel(name) return not table.find({"Home", "Music", "Settings"}, name) end
 
 local function fetchFromCDN(path, write, savePath)
 	pcall(function()
 		checkFolder()
 
-		local file = game:HttpGet(siriusValues.cdn..path) or nil
+		local file = game:HttpGet(controValues.cdn..path) or nil
 		if not file then return end
 		if not write then return file end
 
 
-		writefile(siriusValues.siriusFolder.."/"..savePath, file)
+		writefile(controValues.controFolder.."/"..savePath, file)
 
 		return
 	end)
@@ -1036,8 +1022,8 @@ local function fetchIcon(iconName)
 	pcall(function()
 		checkFolder()
 
-		local pathCDN = siriusValues.icons..iconName..".png"
-		local path = siriusValues.siriusFolder.."/Assets/"..iconName..".png"
+		local pathCDN = controValues.icons..iconName..".png"
+		local path = controValues.controFolder.."/Assets/"..iconName..".png"
 
 		if not isfile(path) then
 			local file = game:HttpGet(pathCDN)
@@ -1070,10 +1056,10 @@ local function createEsp(player)
 	local highlight = Instance.new("Highlight")
 	highlight.FillTransparency = 1
 	highlight.OutlineTransparency = 0
-	highlight.OutlineColor = Color3.new(1,1,1)
+	highlight.OutlineColor = Color3.new(1.0, 1.0, 1.0)
 	highlight.Adornee = player.Character
 	highlight.Name = player.Name
-	highlight.Enabled = siriusValues.actions[7].enabled
+	highlight.Enabled = controValues.actions[7].enabled
 	highlight.Parent = espContainer
 
 	player.CharacterAdded:Connect(function(character)
@@ -1128,7 +1114,7 @@ end
 local function checkAction(target)
 	local toReturn = {}
 
-	for _, action in ipairs(siriusValues.actions) do
+	for _, action in ipairs(controValues.actions) do
 		if action.name == target then
 			toReturn.action = action
 			break
@@ -1146,7 +1132,7 @@ local function checkAction(target)
 end
 
 local function checkSetting(settingTarget, categoryTarget)
-	for _, category in ipairs(siriusSettings) do
+	for _, category in ipairs(controSettings) do
 		if categoryTarget then
 			if category.name == categoryTarget then
 				for _, setting in ipairs(category.categorySettings) do
@@ -1167,7 +1153,7 @@ local function checkSetting(settingTarget, categoryTarget)
 end
 
 local function wipeTransparency(ins, target, checkSelf, tween, duration)
-	local transparencyProperties = siriusValues.transparencyProperties
+	local transparencyProperties = controValues.transparencyProperties
 
 	local function applyTransparency(obj)
 		local properties = transparencyProperties[obj.className]
@@ -1338,13 +1324,13 @@ end
 local function checkLastVersion()
 	checkFolder()
 
-	local lastVersion = isfile and isfile(siriusValues.siriusFolder.."/".."version.srs") and readfile(siriusValues.siriusFolder.."/".."version.srs") or nil
+	local lastVersion = isfile and isfile(controValues.controFolder.."/".."version.srs") and readfile(controValues.controFolder.."/".."version.srs") or nil
 
 	if lastVersion then
-		if lastVersion ~= siriusValues.siriusVersion then queueNotification("Sirius has been updated", "Sirius has been updated to version "..siriusValues.siriusVersion..", check our Discord for all new features and changes.", 4400701828)  end
+		if lastVersion ~= controValues.controVersion then queueNotification("Contro has been updated", "Contro has been updated to version "..controValues.controVersion..", check our Discord for all new features and changes.", 4400701828)  end
 	end
 
-	if writefile then writefile(siriusValues.siriusFolder.."/".."version.srs", siriusValues.siriusVersion) end
+	if writefile then writefile(controValues.controFolder.."/".."version.srs", controValues.controVersion) end
 end
 
 local function removeReverbs(timing)
@@ -1373,7 +1359,7 @@ local function playNext()
 	end
 
 	musicPanel.Menu.TogglePlaying.ImageRectOffset = currentAudio.Playing and Vector2.new(804, 124) or Vector2.new(764, 244)
-	local asset = getcustomasset(siriusValues.siriusFolder.."/Music/"..musicQueue[1].sound)
+	local asset = getcustomasset(controValues.controFolder.."/Music/"..musicQueue[1].sound)
 
 	if checkSetting("Now Playing Notifications").current then queueNotification("Now Playing", musicQueue[1].sound, 4400695581) end
 
@@ -1395,7 +1381,7 @@ end
 local function addToQueue(file)
 	if not getcustomasset then return end
 	checkFolder()
-	if not isfile(siriusValues.siriusFolder.."/Music/"..file) then queueNotification("Unable to locate file", "Please ensure that your audio file is in the Sirius/Music folder and that you are including the file extension (e.g mp3 or ogg).", 4370341699) return end
+	if not isfile(controValues.controFolder.."/Music/"..file) then queueNotification("Unable to locate file", "Please ensure that your audio file is in the Contro/Music folder and that you are including the file extension (e.g mp3 or ogg).", 4370341699) return end
 	musicPanel.AddBox.Input.Text = ""
 
 	local newAudio = musicPanel.Queue.List.Template:Clone()
@@ -1414,7 +1400,7 @@ local function addToQueue(file)
 	table.insert(musicQueue, {sound = file, instanceName = newAudio.Name})
 
 	local getLength = Instance.new("Sound", workspace)
-	getLength.SoundId = getcustomasset(siriusValues.siriusFolder.."/Music/"..file)
+	getLength.SoundId = getcustomasset(controValues.controFolder.."/Music/"..file)
 	getLength.Volume = 0
 	getLength:Play()
 	task.wait(0.05)
@@ -1506,14 +1492,14 @@ local function runScript(raw)
 end
 
 local function syncExperienceInformation()
-	siriusValues.currentCreator = creatorId
+	controValues.currentCreator = creatorId
 
 	if creatorType == Enum.CreatorType.Group then
-		siriusValues.currentGroup = creatorId
-		siriusValues.currentCreator = "group"
+		controValues.currentGroup = creatorId
+		controValues.currentCreator = "group"
 	end
 
-	for _, gameFound in pairs(siriusValues.games) do
+	for _, gameFound in pairs(controValues.games) do
 		if gameFound.id == placeId and gameFound.enabled then
 
 			local minimumTier = gameFound.minimumTier
@@ -1528,8 +1514,8 @@ local function syncExperienceInformation()
 				end
 			end
 
-			local rawFile = siriusValues.rawTree..gameFound.raw
-			siriusValues.currentGame = gameFound
+			local rawFile = controValues.rawTree..gameFound.raw
+			controValues.currentGame = gameFound
 
 			gameDetectionPrompt.ScriptTitle.Text = gameFound.name
 			gameDetectionPrompt.Layer.ScriptSubtitle.Text = gameFound.description
@@ -1597,7 +1583,7 @@ local function syncExperienceInformation()
 
 			gameDetectionPrompt.Layer.Run.MouseButton1Click:Connect(function()
 				closeGameDetection()
-				queueNotification("Running "..gameFound.name, "Now running Sirius' "..gameFound.name.." script, this may take a moment.", 4400701828)
+				queueNotification("Running "..gameFound.name, "Now running Contro' "..gameFound.name.." script, this may take a moment.", 4400701828)
 				runScript(rawFile)
 
 			end)
@@ -1612,7 +1598,7 @@ local function syncExperienceInformation()
 end
 
 local function updateSliderPadding()
-	for _, v in pairs(siriusValues.sliders) do
+	for _, v in pairs(controValues.sliders) do
 		v.padding = {
 			v.object.Interact.AbsolutePosition.X,
 			v.object.Interact.AbsolutePosition.X + v.object.Interact.AbsoluteSize.X
@@ -1644,7 +1630,7 @@ local function updateSlider(data, setValue, forceValue)
 end
 
 local function resetSliders()
-	for _, v in pairs(siriusValues.sliders) do
+	for _, v in pairs(controValues.sliders) do
 		updateSlider(v, v.default, true)
 	end
 end
@@ -1653,7 +1639,7 @@ local function sortActions()
 	characterPanel.Interactions.Grid.Template.Visible = false
 	characterPanel.Interactions.Sliders.Template.Visible = false
 
-	for _, action in ipairs(siriusValues.actions) do
+	for _, action in ipairs(controValues.actions) do
 		local newAction = characterPanel.Interactions.Grid.Template:Clone()
 		newAction.Name = action.name
 		newAction.Parent = characterPanel.Interactions.Grid
@@ -1721,7 +1707,7 @@ local function sortActions()
 			end)
 
 			if not success then
-				queueNotification("Action Error", "This action ('"..(action.name).."') had an error while running, please report this to the Sirius team at sirius.menu/discord", 4370336704)
+				queueNotification("Action Error", "This action ('"..(action.name).."') had an error while running, please report this to the Contro team at contro.menu/discord", 4370336704)
 				action.enabled = false
 				newAction.Icon.Image = "rbxassetid://"..action.images[2]
 				tweenService:Create(newAction, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.55}):Play()
@@ -1733,14 +1719,14 @@ local function sortActions()
 
 	if localPlayer.Character then
 		if not localPlayer.Character:FindFirstChildOfClass('Humanoid').UseJumpPower then
-			siriusValues.sliders[2].name = "jump height"
-			siriusValues.sliders[2].default = 7.2
-			siriusValues.sliders[2].values = {0, 120}
+			controValues.sliders[2].name = "jump height"
+			controValues.sliders[2].default = 7.2
+			controValues.sliders[2].values = {0, 120}
 		end
 	end
 
 
-	for _, slider in ipairs(siriusValues.sliders) do
+	for _, slider in ipairs(controValues.sliders) do
 		local newSlider = characterPanel.Interactions.Sliders.Template:Clone()
 		newSlider.Name = slider.name.." Slider"
 		newSlider.Parent = characterPanel.Interactions.Sliders
@@ -1787,10 +1773,10 @@ local function sortActions()
 end
 
 local function getAdaptiveHighPingThreshold()
-	local adaptiveBaselinePings = siriusValues.pingProfile.adaptiveBaselinePings
+	local adaptiveBaselinePings = controValues.pingProfile.adaptiveBaselinePings
 
 	if #adaptiveBaselinePings == 0 then
-		return siriusValues.pingProfile.adaptiveHighPingThreshold
+		return controValues.pingProfile.adaptiveHighPingThreshold
 	end
 
 	table.sort(adaptiveBaselinePings)
@@ -1801,21 +1787,21 @@ local function getAdaptiveHighPingThreshold()
 		median = adaptiveBaselinePings[math.ceil(#adaptiveBaselinePings/2)]
 	end
 
-	return median * siriusValues.pingProfile.spikeThreshold
+	return median * controValues.pingProfile.spikeThreshold
 end
 
 local function checkHighPing()
-	local recentPings = siriusValues.pingProfile.recentPings
-	local adaptiveBaselinePings = siriusValues.pingProfile.adaptiveBaselinePings
+	local recentPings = controValues.pingProfile.recentPings
+	local adaptiveBaselinePings = controValues.pingProfile.adaptiveBaselinePings
 
 	local currentPing = getPing()
 	table.insert(recentPings, currentPing)
 
-	if #recentPings > siriusValues.pingProfile.maxSamples then
+	if #recentPings > controValues.pingProfile.maxSamples then
 		table.remove(recentPings, 1)
 	end
 
-	if #adaptiveBaselinePings < siriusValues.pingProfile.adaptiveBaselineSamples then
+	if #adaptiveBaselinePings < controValues.pingProfile.adaptiveBaselineSamples then
 		if currentPing >= 350 then currentPing = 300 end
 
 		table.insert(adaptiveBaselinePings, currentPing)
@@ -1940,7 +1926,7 @@ local function closePanel(panelName, openingOther)
 
 		tweenService:Create(panel, TweenInfo.new(0.75, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {BackgroundTransparency = 1}):Play()
 		tweenService:Create(panel, TweenInfo.new(1.1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = button.Size}):Play()
-		tweenService:Create(panel, TweenInfo.new(0.65, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {Position = siriusValues.buttonPositions[panelName]}):Play()
+		tweenService:Create(panel, TweenInfo.new(0.65, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {Position = controValues.buttonPositions[panelName]}):Play()
 		tweenService:Create(toggle, TweenInfo.new(0.6, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut), {Position = UDim2.new(0.5, 0, 1, -85)}):Play()
 	end
 
@@ -1979,7 +1965,7 @@ local function openPanel(panelName)
 	local panelSize = UDim2.new(0, 581, 0, 246)
 
 	panel.Size = button.Size
-	panel.Position = siriusValues.buttonPositions[panelName]
+	panel.Position = controValues.buttonPositions[panelName]
 
 	wipeTransparency(panel, 1, true)
 
@@ -2024,7 +2010,7 @@ local function openPanel(panelName)
 				local tweenTo
 				local name
 
-				for _, sliderFound in ipairs(siriusValues.sliders) do
+				for _, sliderFound in ipairs(controValues.sliders) do
 					if sliderFound.name.." Slider" == slider.Name then
 						tweenTo = sliderFound.value
 						name = sliderFound.name
@@ -2052,7 +2038,7 @@ local function openPanel(panelName)
 
 		for _, gridButton in ipairs(characterPanel.Interactions.Grid:GetChildren()) do
 			if gridButton.ClassName == "Frame" then 
-				for _, action in ipairs(siriusValues.actions) do
+				for _, action in ipairs(controValues.actions) do
 					if action.name == gridButton.Name then
 						if action.enabled then
 							tweenService:Create(gridButton, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.1}):Play()
@@ -2354,8 +2340,8 @@ local function UpdateHome()
 
 	-- Update Executor
 	homeContainer.Interactions.Client.Title.Text = identifyexecutor()
-	if not table.find(siriusValues.executors, string.lower(identifyexecutor())) then
-		homeContainer.Interactions.Client.Subtitle.Text = "This executor is not verified, 	you will probably got hacked lol "
+	if not table.find(controValues.executors, string.lower(identifyexecutor())) then
+		homeContainer.Interactions.Client.Subtitle.Text = "This executor is not verified as supported - but may still work just fine."
 	end
 
 	-- Update Friends Statuses
@@ -2620,11 +2606,11 @@ local function createScript(result)
 
 		if likes ~= dislikes then
 			newScript.Tags.Review.Title.Text = (likes > dislikes) and "Positive Reviews" or "Negative Reviews"
-			newScript.Tags.Review.BackgroundColor3 = (likes > dislikes) and Color3.fromRGB(0, 139, 102) or Color3.fromRGB(180, 0, 0)
+			newScript.Tags.Review.BackgroundColor3 = (likes > dislikes) and Color3.fromRGB(102, 139, 0) or Color3.fromRGB(0, 0, 180)
 			newScript.Tags.Review.Size = (likes > dislikes) and UDim2.new(0, 145, 1, 0) or UDim2.new(0, 150, 1, 0)
 		elseif likes > 0 then
 			newScript.Tags.Review.Title.Text = "Mixed Reviews"
-			newScript.Tags.Review.BackgroundColor3 = Color3.fromRGB(198, 132, 0)
+			newScript.Tags.Review.BackgroundColor3 = Color3.fromRGB(0, 132, 198)
 			newScript.Tags.Review.Size = UDim2.new(0, 130, 1, 0)
 		else
 			newScript.Tags.Review.Visible = false
@@ -2677,7 +2663,7 @@ local function securityDetection(title, content, link, gradient, actions)
 
 	local domain = extractDomain(link) or link
 	checkFolder()
-	local currentAllowlist = isfile and isfile(siriusValues.siriusFolder.."/".."allowedLinks.srs") and readfile(siriusValues.siriusFolder.."/".."allowedLinks.srs") or nil
+	local currentAllowlist = isfile and isfile(controValues.controFolder.."/".."allowedLinks.srs") and readfile(controValues.controFolder.."/".."allowedLinks.srs") or nil
 	if currentAllowlist then currentAllowlist = httpService:JSONDecode(currentAllowlist) if table.find(currentAllowlist, domain) then return true end end
 
 	local newSecurityPrompt = securityPrompt:Clone()
@@ -2731,9 +2717,9 @@ local function securityDetection(title, content, link, gradient, actions)
 					checkFolder()
 					if currentAllowlist then
 						table.insert(currentAllowlist, domain)
-						writefile(siriusValues.siriusFolder.."/".."allowedLinks.srs", httpService:JSONEncode(currentAllowlist))
+						writefile(controValues.controFolder.."/".."allowedLinks.srs", httpService:JSONEncode(currentAllowlist))
 					else
-						writefile(siriusValues.siriusFolder.."/".."allowedLinks.srs", httpService:JSONEncode({domain}))
+						writefile(controValues.controFolder.."/".."allowedLinks.srs", httpService:JSONEncode({domain}))
 					end
 				end
 				decision = true
@@ -2780,9 +2766,9 @@ if Essential or Pro then
 	getgenv()[index] = function(data)
 		if checkSirius() and checkSetting("Intelligent HTTP Interception").current then
 			local title = "Do you trust this source?"
-			local content = "Sirius has prevented data from being sent off-client, would you like to allow data to be sent or retrieved from this source?"
+			local content = "Contro has prevented data from being sent off-client, would you like to allow data to be sent or retrieved from this source?"
 			local url = data.Url or "Unknown Link"
-			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0.764706, 0.305882, 0.0941176))})
+			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.0, 0.0, 0.0)),ColorSequenceKeypoint.new(1, Color3.new(0.0941176, 0.305882, 0.764706))})
 			local actions = {{"Always Allow", true, true}, {"Allow just this once", true}, {"Don't Allow", false}}
 
 			if url == "http://127.0.0.1:6463/rpc?v=1" then
@@ -2790,9 +2776,9 @@ if Essential or Pro then
 
 				if bodyDecoded.cmd == "INVITE_BROWSER" then
 					title = "Would you like to join this Discord server?"
-					content = "Sirius has prevented your Discord client from automatically joining this Discord server, would you like to continue and join, or block it?"
+					content = "Contro has prevented your Discord client from automatically joining this Discord server, would you like to continue and join, or block it?"
 					url = bodyDecoded.args and "discord.gg/"..bodyDecoded.args.code or "Unknown Invite"
-					gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0.345098, 0.396078, 0.94902))})
+					gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.0, 0.0, 0.0)),ColorSequenceKeypoint.new(1, Color3.new(0.94902, 0.396078, 0.345098))})
 					actions = {{"Allow", true}, {"Don't Allow", false}}
 				end
 			end
@@ -2813,9 +2799,9 @@ if Essential or Pro then
 	getgenv()[indexSetClipboard] = function(data)
 		if checkSirius() and checkSetting("Intelligent Clipboard Interception").current then
 			local title = "Would you like to copy this to your clipboard?"
-			local content = "Sirius has prevented a script from setting the below text to your clipboard, would you like to allow this, or prevent it from copying?"
+			local content = "Contro has prevented a script from setting the below text to your clipboard, would you like to allow this, or prevent it from copying?"
 			local url = data or "Unknown Clipboard"
-			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0.776471, 0.611765, 0.529412))})
+			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.0, 0.0, 0.0)),ColorSequenceKeypoint.new(1, Color3.new(0.529412, 0.611765, 0.776471))})
 			local actions = {{"Allow", true}, {"Don't Allow", false}}
 
 			local answer = securityDetection(title, content, url, gradient, actions)
@@ -2894,7 +2880,7 @@ local function searchScriptBlox(query)
 			tweenService:Create(scriptSearch.List, TweenInfo.new(.3,Enum.EasingStyle.Quint),  {ScrollBarImageTransparency = 0}):Play()
 		end
 	else
-		queueNotification("ScriptSearch", "ERROR, please try again", 4384402990)
+		queueNotification("ScriptSearch", "ScriptSearch backend encountered an error, try again later", 4384402990)
 		closeScriptSearch()
 		return
 	end
@@ -3010,8 +2996,8 @@ local function windowFocusChanged(value)
 end
 
 local function onChatted(player, message)
-	local enabled = checkSetting("Chat Spy").current and siriusValues.chatSpy.enabled
-	local chatSpyVisuals = siriusValues.chatSpy.visual
+	local enabled = checkSetting("Chat Spy").current and controValues.chatSpy.enabled
+	local chatSpyVisuals = controValues.chatSpy.visual
 
 	if not message or not checkSirius() then return end
 
@@ -3030,7 +3016,7 @@ local function onChatted(player, message)
 		get:Disconnect()
 
 		if hidden and enabled then
-			chatSpyVisuals.Text = "Sirius Spy - [".. player.Name .."]: "..message2
+			chatSpyVisuals.Text = "Contro Spy - [".. player.Name .."]: "..message2
 			starterGui:SetCore("ChatMakeSystemMessage", chatSpyVisuals)
 		end
 	end
@@ -3212,9 +3198,9 @@ local function createPlayer(player)
 
 	newPlayer.PlayerInteractions.Kill.Interact.MouseButton1Click:Connect(function()
 		queueNotification("Simulation Notification","Simulating Kill Notification for "..player.DisplayName..".")
-		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(0, 124, 89)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(89, 124, 0)}):Play()
 		tweenService:Create(newPlayer.PlayerInteractions.Kill.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(220, 220, 220)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Kill.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(0, 134, 96)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(96, 134, 0)}):Play()
 		kill(player)
 		task.wait(1)
 		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(50, 50, 50)}):Play()
@@ -3223,9 +3209,9 @@ local function createPlayer(player)
 	end)
 
 	newPlayer.PlayerInteractions.Teleport.Interact.MouseButton1Click:Connect(function()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(0, 152, 111)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(111, 152, 0)}):Play()
 		tweenService:Create(newPlayer.PlayerInteractions.Teleport.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(220, 220, 220)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(0, 152, 111)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(111, 152, 0)}):Play()
 		teleportTo(player)
 		task.wait(0.5)
 		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(50, 50, 50)}):Play()
@@ -3352,21 +3338,21 @@ end
 local function saveSettings()
 	checkFolder()
 
-	if isfile and isfile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile) then
-		writefile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile, httpService:JSONEncode(siriusSettings))
+	if isfile and isfile(controValues.controFolder.."/"..controValues.settingsFile) then
+		writefile(controValues.controFolder.."/"..controValues.settingsFile, httpService:JSONEncode(controSettings))
 	end
 end
 
 local function assembleSettings()
-	if isfile and isfile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile) then
+	if isfile and isfile(controValues.controFolder.."/"..controValues.settingsFile) then
 		local currentSettings
 
 		local success, response = pcall(function()
-			currentSettings = httpService:JSONDecode(readfile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile))
+			currentSettings = httpService:JSONDecode(readfile(controValues.controFolder.."/"..controValues.settingsFile))
 		end)
 
 		if success then
-			for _, liveCategory in ipairs(siriusSettings) do
+			for _, liveCategory in ipairs(controSettings) do
 				for _, liveSetting in ipairs(liveCategory.categorySettings) do
 					for _, category in ipairs(currentSettings) do
 						for _, setting in ipairs(category.categorySettings) do
@@ -3378,18 +3364,18 @@ local function assembleSettings()
 				end
 			end
 
-			writefile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile, httpService:JSONEncode(siriusSettings)) -- Update file with any new settings added
+			writefile(controValues.controFolder.."/"..controValues.settingsFile, httpService:JSONEncode(controSettings)) -- Update file with any new settings added
 		end
 	else
 		if writefile then
 			checkFolder()
-			if not isfile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile) then
-				writefile(siriusValues.siriusFolder.."/"..siriusValues.settingsFile, httpService:JSONEncode(siriusSettings))
+			if not isfile(controValues.controFolder.."/"..controValues.settingsFile) then
+				writefile(controValues.controFolder.."/"..controValues.settingsFile, httpService:JSONEncode(controSettings))
 			end
 		end 
 	end
 
-	for _, category in siriusSettings do
+	for _, category in controSettings do
 		local newCategory = settingsPanel.SettingTypes.Template:Clone()
 		newCategory.Name = category.name
 		newCategory.Title.Text = string.upper(category.name)
@@ -3735,7 +3721,7 @@ local function initialiseAntiKick()
 
 			originalIndex = hookmetamethod(game, "__index", function(self, method)
 				if self == localPlayer and method:lower() == "kick" and checkSetting("Client-Based Anti Kick").current and checkSirius() then
-					queueNotification("Kick Prevented", "Sirius has prevented you from being kicked by the client.", 4400699701)
+					queueNotification("Kick Prevented", "Contro has prevented you from being kicked by the client.", 4400699701)
 					return error("Expected ':' not '.' calling member function Kick", 2)
 				end
 				return originalIndex(self, method)
@@ -3743,7 +3729,7 @@ local function initialiseAntiKick()
 
 			originalNamecall = hookmetamethod(game, "__namecall", function(self, ...)
 				if self == localPlayer and getnamecallmethod():lower() == "kick" and checkSetting("Client-Based Anti Kick").current and checkSirius() then
-					queueNotification("Kick Prevented", "Sirius has prevented you from being kicked by the client.", 4400699701)
+					queueNotification("Kick Prevented", "Contro has prevented you from being kicked by the client.", 4400699701)
 					return
 				end
 				return originalNamecall(self, ...)
@@ -3764,7 +3750,7 @@ local function boost()
 end
 
 local function start()
-	if siriusValues.releaseType == "Experimental" then -- Make this more secure.
+	if controValues.releaseType == "Experimental" then -- Make this more secure.
 		if not Pro then localPlayer:Kick("This is an experimental release, you must be Pro to run this. \n\nUpgrade at https://sirius.menu/") return end
 	end
 	windowFocusChanged(true)
@@ -3784,7 +3770,7 @@ local function start()
 
 	if not checkSetting("Load Hidden").current then 
 		--if checkSetting("Startup Sound Effect").current then
-		--	local startupPath = siriusValues.siriusFolder.."/Assets/startup.wav"
+		--	local startupPath = controValues.controFolder.."/Assets/startup.wav"
 		--	local startupAsset
 
 		--	if isfile(startupPath) then
@@ -3811,15 +3797,15 @@ local function start()
 	end
 
 	if script_key and not (Essential or Pro) then
-		queueNotification("License Error", "We've detected a key being placed above Sirius loadstring, however your key seems to be invalid. Make a support request at sirius.menu/discord to get this solved within minutes.", "document-minus")
+		queueNotification("License Error", "We've detected a key being placed above Contro loadstring, however your key seems to be invalid. Make a support request at contro.menu/discord to get this solved within minutes.", "document-minus")
 	end
 
-	if siriusValues.enableExperienceSync then
+	if controValues.enableExperienceSync then
 		task.spawn(syncExperienceInformation) 
 	end
 end
 
--- Sirius Events
+-- Contro Events
 
 start()
 
@@ -3951,7 +3937,7 @@ end)
 homeContainer.Interactions.Discord.Interact.MouseButton1Click:Connect(function()
 	if setclipboard then 
 		originalSetClipboard("https://sirius.menu/discord")
-		queueNotification("Discord Invite Copied", "We've set your clipboard to the Sirius discord invite.", 4335479121)
+		queueNotification("Discord Invite Copied", "We've set your clipboard to the Contro discord invite.", 4335479121)
 	else
 		queueNotification("Unable to copy Discord invite", "Missing setclipboard() function, can't set data to your clipboard.", 4335479658)
 	end
@@ -4059,7 +4045,7 @@ userInputService.InputBegan:Connect(function(input, processed)
 		return
 	end
 
-	for _, category in ipairs(siriusSettings) do
+	for _, category in ipairs(controSettings) do
 		for _, setting in ipairs(category.categorySettings) do
 			if setting.settingType == "Key" then
 				if setting.current ~= nil and setting.current ~= "" then
@@ -4131,7 +4117,7 @@ userInputService.InputEnded:Connect(function(input, processed)
 	if not checkSirius() then return end
 
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
-		for _, slider in pairs(siriusValues.sliders) do
+		for _, slider in pairs(controValues.sliders) do
 			slider.active = false
 
 			if characterPanel.Visible and not debounce and slider.object and checkSirius() then
@@ -4181,7 +4167,7 @@ scriptSearch.SearchBox.Focused:Connect(function()
 end)
 
 mouse.Move:Connect(function()
-	for _, slider in pairs(siriusValues.sliders) do
+	for _, slider in pairs(controValues.sliders) do
 		if slider.active then
 			updateSlider(slider)
 		end
@@ -4231,11 +4217,11 @@ players.PlayerAdded:Connect(function(player)
 	if checkSetting("Moderator Detection").current and Pro then
 		local roleFound = player:GetRoleInGroup(creatorId)
 
-		if siriusValues.currentCreator == "group" then
-			for _, role in pairs(siriusValues.administratorRoles) do 
+		if controValues.currentCreator == "group" then
+			for _, role in pairs(controValues.administratorRoles) do 
 				if string.find(string.lower(roleFound), role) then
 					promptModerator(player, roleFound)
-					queueNotification("Administrator Joined", siriusValues.currentGroup .." "..roleFound.." ".. player.DisplayName .." has joined your session", 3944670656) -- change to group name
+					queueNotification("Administrator Joined", controValues.currentGroup .." "..roleFound.." ".. player.DisplayName .." has joined your session", 3944670656) -- change to group name
 				end
 			end
 		end
@@ -4283,12 +4269,12 @@ runService.RenderStepped:Connect(function(frame)
 	if not checkSirius() then return end
 	local fps = math.round(1/frame)
 
-	table.insert(siriusValues.frameProfile.fpsQueue, fps)
-	siriusValues.frameProfile.totalFPS += fps
+	table.insert(controValues.frameProfile.fpsQueue, fps)
+	controValues.frameProfile.totalFPS += fps
 
-	if #siriusValues.frameProfile.fpsQueue > siriusValues.frameProfile.fpsQueueSize then
-		siriusValues.frameProfile.totalFPS -= siriusValues.frameProfile.fpsQueue[1]
-		table.remove(siriusValues.frameProfile.fpsQueue, 1)
+	if #controValues.frameProfile.fpsQueue > controValues.frameProfile.fpsQueueSize then
+		controValues.frameProfile.totalFPS -= controValues.frameProfile.fpsQueue[1]
+		table.remove(controValues.frameProfile.fpsQueue, 1)
 	end
 end)
 
@@ -4298,8 +4284,8 @@ runService.Stepped:Connect(function()
 	local character = localPlayer.Character
 	if character then
 		-- No Clip
-		local noclipEnabled = siriusValues.actions[1].enabled
-		local flingEnabled = siriusValues.actions[6].enabled
+		local noclipEnabled = controValues.actions[1].enabled
+		local flingEnabled = controValues.actions[6].enabled
 
 		for _, part in ipairs(character:GetDescendants()) do
 			if part:IsA("BasePart") then
@@ -4342,7 +4328,7 @@ runService.Heartbeat:Connect(function()
 		end
 
 		-- Fly
-		if siriusValues.actions[2].enabled then
+		if controValues.actions[2].enabled then
 			local camCFrame = camera.CFrame
 			local velocity = Vector3.zero
 			local rotation = camCFrame.Rotation
@@ -4371,10 +4357,10 @@ runService.Heartbeat:Connect(function()
 			end
 
 			local tweenInfo = TweenInfo.new(0.5)
-			tweenService:Create(bodyVelocity, tweenInfo, { Velocity = velocity * siriusValues.sliders[3].value * 45 }):Play()
+			tweenService:Create(bodyVelocity, tweenInfo, { Velocity = velocity * controValues.sliders[3].value * 45 }):Play()
 			bodyVelocity.Parent = primaryPart
 
-			if not siriusValues.actions[6].enabled then
+			if not controValues.actions[6].enabled then
 				tweenService:Create(bodyGyro, tweenInfo, { CFrame = rotation }):Play()
 				bodyGyro.Parent = primaryPart
 			end
@@ -4508,7 +4494,7 @@ while task.wait(1) do
 		local disconnectType
 		local foundString
 
-		for _, preDisconnectType in ipairs(siriusValues.disconnectTypes) do
+		for _, preDisconnectType in ipairs(controValues.disconnectTypes) do
 			for _, typeString in pairs(preDisconnectType[2]) do
 				if string.find(reasonPrompt, typeString) then
 					disconnectType = preDisconnectType[1]
@@ -4529,8 +4515,8 @@ while task.wait(1) do
 			disconnectedPrompt.Action.Size = UDim2.new(0, 77, 0, 36) -- use textbounds
 
 			disconnectedPrompt.UIGradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, Color3.new(0,0,0)),
-				ColorSequenceKeypoint.new(1, Color3.new(0.819608, 0.164706, 0.164706))
+				ColorSequenceKeypoint.new(0, Color3.new(0.0, 0.0, 0.0)),
+				ColorSequenceKeypoint.new(1, Color3.new(0.164706, 0.164706, 0.819608))
 			})
 		elseif disconnectType == "kick" then
 			disconnectedPrompt.Content.Text = "You've been kicked, would you like to serverhop?"
@@ -4538,8 +4524,8 @@ while task.wait(1) do
 			disconnectedPrompt.Action.Size = UDim2.new(0, 114, 0, 36)
 
 			disconnectedPrompt.UIGradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, Color3.new(0,0,0)),
-				ColorSequenceKeypoint.new(1, Color3.new(0.0862745, 0.596078, 0.835294))
+				ColorSequenceKeypoint.new(0, Color3.new(0.0, 0.0, 0.0)),
+				ColorSequenceKeypoint.new(1, Color3.new(0.835294, 0.596078, 0.0862745))
 			})
 		elseif disconnectType == "network" then
 			disconnectedPrompt.Content.Text = "You've lost connection, would you like to rejoin?"
@@ -4547,8 +4533,8 @@ while task.wait(1) do
 			disconnectedPrompt.Action.Size = UDim2.new(0, 82, 0, 36)
 
 			disconnectedPrompt.UIGradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, Color3.new(0,0,0)),
-				ColorSequenceKeypoint.new(1, Color3.new(0.862745, 0.501961, 0.0862745))
+				ColorSequenceKeypoint.new(0, Color3.new(0.0, 0.0, 0.0)),
+				ColorSequenceKeypoint.new(1, Color3.new(0.0862745, 0.501961, 0.862745))
 			})
 		end
 
@@ -4574,34 +4560,34 @@ while task.wait(1) do
 
 		-- Two-Way Adaptive Latency Checks
 		if checkHighPing() then
-			if siriusValues.pingProfile.pingNotificationCooldown <= 0 then
+			if controValues.pingProfile.pingNotificationCooldown <= 0 then
 				if checkSetting("Adaptive Latency Warning").current then
 					queueNotification("High Latency Warning","We've noticed your latency has reached a higher value than usual, you may find that you are lagging or your actions are delayed in-game. Consider checking for any background downloads on your machine.", 4370305588)
-					siriusValues.pingProfile.pingNotificationCooldown = 120
+					controValues.pingProfile.pingNotificationCooldown = 120
 				end
 			end
 		end
 
-		if siriusValues.pingProfile.pingNotificationCooldown > 0 then
-			siriusValues.pingProfile.pingNotificationCooldown -= 1
+		if controValues.pingProfile.pingNotificationCooldown > 0 then
+			controValues.pingProfile.pingNotificationCooldown -= 1
 		end
 
 		-- Adaptive frame time checks
-		if siriusValues.frameProfile.frameNotificationCooldown <= 0 then
-			if #siriusValues.frameProfile.fpsQueue > 0 then
-				local avgFPS = siriusValues.frameProfile.totalFPS / #siriusValues.frameProfile.fpsQueue
+		if controValues.frameProfile.frameNotificationCooldown <= 0 then
+			if #controValues.frameProfile.fpsQueue > 0 then
+				local avgFPS = controValues.frameProfile.totalFPS / #controValues.frameProfile.fpsQueue
 
-				if avgFPS < siriusValues.frameProfile.lowFPSThreshold then
+				if avgFPS < controValues.frameProfile.lowFPSThreshold then
 					if checkSetting("Adaptive Performance Warning").current then
 						queueNotification("Degraded Performance","We've noticed your client's frames per second have decreased. Consider checking for any background tasks or programs on your machine.", 4384400106)
-						siriusValues.frameProfile.frameNotificationCooldown = 120	
+						controValues.frameProfile.frameNotificationCooldown = 120	
 					end
 				end
 			end
 		end
 
-		if siriusValues.frameProfile.frameNotificationCooldown > 0 then
-			siriusValues.frameProfile.frameNotificationCooldown -= 1
+		if controValues.frameProfile.frameNotificationCooldown > 0 then
+			controValues.frameProfile.frameNotificationCooldown -= 1
 		end
 	end
 end
