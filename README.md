@@ -1,15 +1,3 @@
-Potential Future Setting Options
- - Block entire domain or just the specific page in the Sirius Intelligent Flow Interception. Do this on case by case, e.g blocked = {"link.com", true} - true being whether its the domain or not
- - Serverhop type (default/gta)
- - Hook Specific Functions to reduce the need for external scripts
- 
---]]
-
--- Ensure the game is loaded 
-if not game:IsLoaded() then
-	game.Loaded:Wait()
-end
-
 -- Check License Tier
 local Pro = true -- We're open sourced now!
 
@@ -131,7 +119,7 @@ local siriusValues = {
 	chatSpy = {
 		enabled = true,
 		visual = {
-			Color = Color3.fromRGB(229, 107, 0),
+			Color = Color3.fromRGB(26, 148, 255),
 			Font = Enum.Font.SourceSansBold,
 			TextSize = 18
 		},
@@ -156,7 +144,7 @@ local siriusValues = {
 		{
 			name = "Noclip",
 			images = {14385986465, 9134787693},
-			color = Color3.fromRGB(255, 85, 128),
+			color = Color3.fromRGB(0, 170, 127),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function() end,
@@ -164,7 +152,7 @@ local siriusValues = {
 		{
 			name = "Flight",
 			images = {9134755504, 14385992605},
-			color = Color3.fromRGB(85, 218, 209),
+			color = Color3.fromRGB(170, 37, 46),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -178,7 +166,7 @@ local siriusValues = {
 		{
 			name = "Refresh",
 			images = {9134761478, 9134761478},
-			color = Color3.fromRGB(194, 76, 157),
+			color = Color3.fromRGB(61, 179, 98),
 			enabled = false,
 			rotateWhileEnabled = true,
 			disableAfter = 3,
@@ -200,7 +188,7 @@ local siriusValues = {
 		{
 			name = "Respawn",
 			images = {9134762943, 9134762943},
-			color = Color3.fromRGB(206, 167, 62),
+			color = Color3.fromRGB(49, 88, 193),
 			enabled = false,
 			rotateWhileEnabled = true,
 			disableAfter = 2,
@@ -215,7 +203,7 @@ local siriusValues = {
 		{
 			name = "Invulnerability",
 			images = {9134765994, 14386216487},
-			color = Color3.fromRGB(62, 209, 165),
+			color = Color3.fromRGB(193, 46, 90),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function() end,
@@ -223,7 +211,7 @@ local siriusValues = {
 		{
 			name = "Fling",
 			images = {9134785384, 14386226155},
-			color = Color3.fromRGB(71, 170, 194),
+			color = Color3.fromRGB(184, 85, 61),
 			enabled = false,
 			rotateWhileEnabled = true,
 			callback = function(value)
@@ -250,7 +238,7 @@ local siriusValues = {
 		{
 			name = "Extrasensory Perception",
 			images = {9134780101, 14386232387},
-			color = Color3.fromRGB(41, 73, 236),
+			color = Color3.fromRGB(214, 182, 19),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -262,7 +250,7 @@ local siriusValues = {
 		{
 			name = "Night and Day",
 			images = {9134778004, 10137794784},
-			color = Color3.fromRGB(153, 180, 65),
+			color = Color3.fromRGB(102, 75, 190),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -272,7 +260,7 @@ local siriusValues = {
 		{
 			name = "Global Audio",
 			images = {9134774810, 14386246782},
-			color = Color3.fromRGB(53, 152, 197),
+			color = Color3.fromRGB(202, 103, 58),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function(value)
@@ -287,7 +275,7 @@ local siriusValues = {
 		{
 			name = "Visibility",
 			images = {14386256326, 9134770786},
-			color = Color3.fromRGB(193, 161, 85),
+			color = Color3.fromRGB(62, 94, 170),
 			enabled = false,
 			rotateWhileEnabled = false,
 			callback = function() end,
@@ -296,7 +284,7 @@ local siriusValues = {
 	sliders = {
 		{
 			name = "player speed",
-			color = Color3.fromRGB(211, 102, 162),
+			color = Color3.fromRGB(44, 153, 93),
 			values = {0, 300},
 			default = 16,
 			value = 16,
@@ -311,7 +299,7 @@ local siriusValues = {
 		},
 		{
 			name = "jump power",
-			color = Color3.fromRGB(196, 129, 71),
+			color = Color3.fromRGB(59, 126, 184),
 			values = {0, 350},
 			default = 50,
 			value = 16,
@@ -330,7 +318,7 @@ local siriusValues = {
 		},
 		{
 			name = "flight speed",
-			color = Color3.fromRGB(78, 210, 210),
+			color = Color3.fromRGB(177, 45, 45),
 			values = {1, 25},
 			default = 3,
 			value = 3,
@@ -339,7 +327,7 @@ local siriusValues = {
 		},
 		{
 			name = "field of view",
-			color = Color3.fromRGB(57, 77, 180),
+			color = Color3.fromRGB(198, 178, 75),
 			values = {45, 120},
 			default = 70,
 			value = 16,
@@ -355,7 +343,7 @@ local siriusSettings = {
 	{
 		name = 'General',
 		description = 'The general settings for Sirius, from simple to unique features.',
-		color = Color3.new(0.8823529999999999, 0.5098039999999999, 0.27451000000000003),
+		color = Color3.new(0.117647, 0.490196, 0.72549),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -439,7 +427,7 @@ local siriusSettings = {
 	{
 		name = 'Keybinds',
 		description = 'Assign keybinds to actions or change keybinds such as the one to open/close Sirius.',
-		color = Color3.new(0.9058824, 0.31372500000000003, 0.49019599999999997),
+		color = Color3.new(0.0941176, 0.686275, 0.509804),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -573,7 +561,7 @@ local siriusSettings = {
 	{
 		name = 'Performance',
 		description = 'Tweak and test your performance settings for Roblox in Sirius.',
-		color = Color3.new(0.0, 0.623529, 0.831373),
+		color = Color3.new(1, 0.376471, 0.168627),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -614,7 +602,7 @@ local siriusSettings = {
 	{
 		name = 'Detections',
 		description = 'Sirius detects and prevents anything malicious or possibly harmful to your wellbeing.',
-		color = Color3.new(0.294118, 1.0, 1.0),
+		color = Color3.new(0.705882, 0, 0),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -668,7 +656,7 @@ local siriusSettings = {
 	{
 		name = 'Logging',
 		description = 'Send logs to your specified webhook URL of things like player joins and leaves and messages.',
-		color = Color3.new(0.09411800000000003, 0.21960800000000003, 0.9333333),
+		color = Color3.new(0.905882, 0.780392, 0.0666667),
 		minimumLicense = 'Free',
 		categorySettings = {
 			{
@@ -1056,7 +1044,7 @@ local function createEsp(player)
 	local highlight = Instance.new("Highlight")
 	highlight.FillTransparency = 1
 	highlight.OutlineTransparency = 0
-	highlight.OutlineColor = Color3.new(0.0, 0.0, 0.0)
+	highlight.OutlineColor = Color3.new(1,1,1)
 	highlight.Adornee = player.Character
 	highlight.Name = player.Name
 	highlight.Enabled = siriusValues.actions[7].enabled
@@ -1409,14 +1397,14 @@ local function addToQueue(file)
 	getLength:Destroy()
 
 	newAudio.MouseEnter:Connect(function()
-		tweenService:Create(newAudio, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(155, 155, 155)}):Play()
+		tweenService:Create(newAudio, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(100, 100, 100)}):Play()
 		tweenService:Create(newAudio.Close, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
 		tweenService:Create(newAudio.Duration, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 	end)
 
 	newAudio.MouseLeave:Connect(function()
 		tweenService:Create(newAudio.Close, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
-		tweenService:Create(newAudio, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+		tweenService:Create(newAudio, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {BackgroundColor3 = Color3.fromRGB(0, 0, 0)}):Play()
 		tweenService:Create(newAudio.Duration, TweenInfo.new(0.45, Enum.EasingStyle.Exponential), {TextTransparency = 0.7}):Play()
 	end)
 
@@ -2553,7 +2541,7 @@ local function closeScriptSearch()
 
 	task.wait(0.1)
 
-	scriptSearch.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	scriptSearch.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 	scriptSearch.UIGradient.Enabled = false
 	tweenService:Create(scriptSearch, TweenInfo.new(0.4, Enum.EasingStyle.Quint),  {Size = UDim2.new(0, 520, 0, 0)}):Play()
 	scriptSearch.SearchBox:ReleaseFocus()
@@ -2567,7 +2555,7 @@ local function closeScriptSearch()
 	end
 
 	task.wait(0.1)
-	scriptSearch.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+	scriptSearch.BackgroundColor3 = Color3.fromRGB(255 ,255, 255)
 	scriptSearch.Visible = false
 	scriptSearch.UIGradient.Enabled = true
 	debounce = false
@@ -2606,11 +2594,11 @@ local function createScript(result)
 
 		if likes ~= dislikes then
 			newScript.Tags.Review.Title.Text = (likes > dislikes) and "Positive Reviews" or "Negative Reviews"
-			newScript.Tags.Review.BackgroundColor3 = (likes > dislikes) and Color3.fromRGB(255, 116, 153) or Color3.fromRGB(75, 255, 255)
+			newScript.Tags.Review.BackgroundColor3 = (likes > dislikes) and Color3.fromRGB(0, 139, 102) or Color3.fromRGB(180, 0, 0)
 			newScript.Tags.Review.Size = (likes > dislikes) and UDim2.new(0, 145, 1, 0) or UDim2.new(0, 150, 1, 0)
 		elseif likes > 0 then
 			newScript.Tags.Review.Title.Text = "Mixed Reviews"
-			newScript.Tags.Review.BackgroundColor3 = Color3.fromRGB(57, 123, 255)
+			newScript.Tags.Review.BackgroundColor3 = Color3.fromRGB(198, 132, 0)
 			newScript.Tags.Review.Size = UDim2.new(0, 130, 1, 0)
 		else
 			newScript.Tags.Review.Visible = false
@@ -2768,7 +2756,7 @@ if Essential or Pro then
 			local title = "Do you trust this source?"
 			local content = "Sirius has prevented data from being sent off-client, would you like to allow data to be sent or retrieved from this source?"
 			local url = data.Url or "Unknown Link"
-			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(1.0, 1.0, 1.0)),ColorSequenceKeypoint.new(1, Color3.new(0.235294, 0.694118, 0.9058824))})
+			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0.764706, 0.305882, 0.0941176))})
 			local actions = {{"Always Allow", true, true}, {"Allow just this once", true}, {"Don't Allow", false}}
 
 			if url == "http://127.0.0.1:6463/rpc?v=1" then
@@ -2778,7 +2766,7 @@ if Essential or Pro then
 					title = "Would you like to join this Discord server?"
 					content = "Sirius has prevented your Discord client from automatically joining this Discord server, would you like to continue and join, or block it?"
 					url = bodyDecoded.args and "discord.gg/"..bodyDecoded.args.code or "Unknown Invite"
-					gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(1.0, 1.0, 1.0)),ColorSequenceKeypoint.new(1, Color3.new(0.654902, 0.6039220000000001, 0.050980000000000025))})
+					gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0.345098, 0.396078, 0.94902))})
 					actions = {{"Allow", true}, {"Don't Allow", false}}
 				end
 			end
@@ -2801,7 +2789,7 @@ if Essential or Pro then
 			local title = "Would you like to copy this to your clipboard?"
 			local content = "Sirius has prevented a script from setting the below text to your clipboard, would you like to allow this, or prevent it from copying?"
 			local url = data or "Unknown Clipboard"
-			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(1.0, 1.0, 1.0)),ColorSequenceKeypoint.new(1, Color3.new(0.22352899999999998, 0.388235, 0.470588))})
+			local gradient = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0.776471, 0.611765, 0.529412))})
 			local actions = {{"Allow", true}, {"Don't Allow", false}}
 
 			local answer = securityDetection(title, content, url, gradient, actions)
@@ -3198,25 +3186,25 @@ local function createPlayer(player)
 
 	newPlayer.PlayerInteractions.Kill.Interact.MouseButton1Click:Connect(function()
 		queueNotification("Simulation Notification","Simulating Kill Notification for "..player.DisplayName..".")
-		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(255, 131, 166)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Kill.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(35, 35, 35)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Kill.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(255, 121, 159)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(0, 124, 89)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(220, 220, 220)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(0, 134, 96)}):Play()
 		kill(player)
 		task.wait(1)
-		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(205, 205, 205)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Kill.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(155, 155, 155)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Kill.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(195, 195, 195)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(50, 50, 50)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(100, 100, 100)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Kill.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(60, 60, 60)}):Play()
 	end)
 
 	newPlayer.PlayerInteractions.Teleport.Interact.MouseButton1Click:Connect(function()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(255, 103, 144)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(35, 35, 35)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(255, 103, 144)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(0, 152, 111)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(220, 220, 220)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(0, 152, 111)}):Play()
 		teleportTo(player)
 		task.wait(0.5)
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(205, 205, 205)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(155, 155, 155)}):Play()
-		tweenService:Create(newPlayer.PlayerInteractions.Teleport.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(195, 195, 195)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(50, 50, 50)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport.Icon, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {ImageColor3 = Color3.fromRGB(100, 100, 100)}):Play()
+		tweenService:Create(newPlayer.PlayerInteractions.Teleport.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Color = Color3.fromRGB(60, 60, 60)}):Play()
 	end)
 
 	newPlayer.PlayerInteractions.Spectate.Interact.MouseButton1Click:Connect(function()
@@ -3251,8 +3239,8 @@ local function openSettings()
 
 	settingsPanel.Visible = true
 	settingsPanel.UIGradient.Enabled = true
-	settingsPanel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	settingsPanel.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.9529412, 0.9529412, 0.9529412)),ColorSequenceKeypoint.new(1, Color3.new(0.9529412, 0.9529412, 0.9529412))})
+	settingsPanel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	settingsPanel.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.0470588, 0.0470588, 0.0470588)),ColorSequenceKeypoint.new(1, Color3.new(0.0470588, 0.0470588, 0.0470588))})
 	settingsPanel.UIGradient.Offset = Vector2.new(0, 1.7)
 	settingsPanel.SettingTypes.Visible = true
 	settingsPanel.SettingLists.Visible = false
@@ -3380,7 +3368,7 @@ local function assembleSettings()
 		newCategory.Name = category.name
 		newCategory.Title.Text = string.upper(category.name)
 		newCategory.Parent = settingsPanel.SettingTypes
-		newCategory.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.9607843, 0.9607843, 0.9607843)),ColorSequenceKeypoint.new(1, category.color)})
+		newCategory.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.0392157, 0.0392157, 0.0392157)),ColorSequenceKeypoint.new(1, category.color)})
 
 		newCategory.Visible = true
 
@@ -3389,8 +3377,8 @@ local function assembleSettings()
 		hue = math.clamp(hue + 0.01, 0, 1) sat = math.clamp(sat + 0.1, 0, 1) val = math.clamp(val + 0.2, 0, 1)
 
 		local newColor = Color3.fromHSV(hue, sat, val)
-		newCategory.UIStroke.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.8823529999999999, 0.8823529999999999, 0.8823529999999999)),ColorSequenceKeypoint.new(1, newColor)})
-		newCategory.Shadow.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.8823529999999999, 0.8823529999999999, 0.8823529999999999)),ColorSequenceKeypoint.new(1, newColor)})
+		newCategory.UIStroke.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.117647, 0.117647, 0.117647)),ColorSequenceKeypoint.new(1, newColor)})
+		newCategory.Shadow.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.117647, 0.117647, 0.117647)),ColorSequenceKeypoint.new(1, newColor)})
 
 		local newList = settingsPanel.SettingLists.Template:Clone()
 		newList.Name = category.name
@@ -3413,7 +3401,7 @@ local function assembleSettings()
 
 		newCategory.Interact.MouseButton1Click:Connect(function()
 			if settingsPanel.SettingLists:FindFirstChild(category.name) then
-				settingsPanel.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.9529412, 0.9529412, 0.9529412)),ColorSequenceKeypoint.new(1, category.color)})
+				settingsPanel.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0.0470588, 0.0470588, 0.0470588)),ColorSequenceKeypoint.new(1, category.color)})
 				settingsPanel.SettingTypes.Visible = false
 				settingsPanel.SettingLists.Visible = true
 				settingsPanel.SettingLists.UIPageLayout:JumpTo(settingsPanel.SettingLists[category.name])
@@ -3463,8 +3451,8 @@ local function assembleSettings()
 
 					if setting.current == true then
 						newSwitch.Switch.Indicator.Position = UDim2.new(1, -20, 0.5, 0)
-						newSwitch.Switch.Indicator.UIStroke.Color = Color3.fromRGB(35, 35, 35)
-						newSwitch.Switch.Indicator.BackgroundColor3 = Color3.fromRGB(0, 0, 0)			
+						newSwitch.Switch.Indicator.UIStroke.Color = Color3.fromRGB(220, 220, 220)
+						newSwitch.Switch.Indicator.BackgroundColor3 = Color3.fromRGB(255, 255, 255)			
 						newSwitch.Switch.Indicator.BackgroundTransparency = 0.6
 					end
 
@@ -3472,8 +3460,8 @@ local function assembleSettings()
 					if minimumLicense then
 						if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Essential" and not (Pro or Essential)) then
 							newSwitch.Switch.Indicator.Position = UDim2.new(1, -40, 0.5, 0)
-							newSwitch.Switch.Indicator.UIStroke.Color = Color3.fromRGB(0, 0, 0)
-							newSwitch.Switch.Indicator.BackgroundColor3 = Color3.fromRGB(20, 20, 20)			
+							newSwitch.Switch.Indicator.UIStroke.Color = Color3.fromRGB(255, 255, 255)
+							newSwitch.Switch.Indicator.BackgroundColor3 = Color3.fromRGB(235, 235, 235)			
 							newSwitch.Switch.Indicator.BackgroundTransparency = 0.75
 						end
 					end
@@ -3491,8 +3479,8 @@ local function assembleSettings()
 						if setting.current == true then
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -20, 0.5, 0)}):Play()
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0,12,0,12)}):Play()
-							tweenService:Create(newSwitch.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Color3.fromRGB(55, 55, 55)}):Play()
-							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.8, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(0, 0, 0)}):Play()
+							tweenService:Create(newSwitch.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Color3.fromRGB(200, 200, 200)}):Play()
+							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.8, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 							tweenService:Create(newSwitch.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Transparency = 0.5}):Play()
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundTransparency = 0.6}):Play()
 							task.wait(0.05)
@@ -3500,9 +3488,9 @@ local function assembleSettings()
 						else
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.45, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -40, 0.5, 0)}):Play()
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0,12,0,12)}):Play()
-							tweenService:Create(newSwitch.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Color3.fromRGB(0, 0, 0)}):Play()
+							tweenService:Create(newSwitch.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Color = Color3.fromRGB(255, 255, 255)}):Play()
 							tweenService:Create(newSwitch.Switch.Indicator.UIStroke, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Transparency = 0.7}):Play()
-							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.8, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}):Play()
+							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.8, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundColor3 = Color3.fromRGB(235, 235, 235)}):Play()
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.55, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {BackgroundTransparency = 0.75}):Play()
 							task.wait(0.05)
 							tweenService:Create(newSwitch.Switch.Indicator, TweenInfo.new(0.4, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Size = UDim2.new(0,17,0,17)}):Play()
@@ -4136,17 +4124,17 @@ end)
 
 scriptSearch.SearchBox:GetPropertyChangedSignal("Text"):Connect(function()
 	if #scriptSearch.SearchBox.Text > 0 then
-		tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(0, 0, 0)}):Play()
-		tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(0, 0, 0)}):Play()
+		tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+		tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 	else
-		tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(105, 105, 105)}):Play()
-		tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(105, 105, 105)}):Play()
+		tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(150, 150, 150)}):Play()
+		tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(150, 150, 150)}):Play()
 	end
 end)
 
 scriptSearch.SearchBox.FocusLost:Connect(function(enterPressed)
-	tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(105, 105, 105)}):Play()
-	tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(105, 105, 105)}):Play()
+	tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(150, 150, 150)}):Play()
+	tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(150, 150, 150)}):Play()
 
 	if #scriptSearch.SearchBox.Text > 0 then
 		if enterPressed then
@@ -4161,8 +4149,8 @@ end)
 
 scriptSearch.SearchBox.Focused:Connect(function()
 	if #scriptSearch.SearchBox.Text > 0 then
-		tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(0, 0, 0)}):Play()
-		tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(0, 0, 0)}):Play()
+		tweenService:Create(scriptSearch.Icon, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {ImageColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+		tweenService:Create(scriptSearch.SearchBox, TweenInfo.new(.5,Enum.EasingStyle.Quint),  {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 	end
 end)
 
@@ -4515,8 +4503,8 @@ while task.wait(1) do
 			disconnectedPrompt.Action.Size = UDim2.new(0, 77, 0, 36) -- use textbounds
 
 			disconnectedPrompt.UIGradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, Color3.new(1.0, 1.0, 1.0)),
-				ColorSequenceKeypoint.new(1, Color3.new(0.180392, 0.835294, 0.835294))
+				ColorSequenceKeypoint.new(0, Color3.new(0,0,0)),
+				ColorSequenceKeypoint.new(1, Color3.new(0.819608, 0.164706, 0.164706))
 			})
 		elseif disconnectType == "kick" then
 			disconnectedPrompt.Content.Text = "You've been kicked, would you like to serverhop?"
@@ -4524,8 +4512,8 @@ while task.wait(1) do
 			disconnectedPrompt.Action.Size = UDim2.new(0, 114, 0, 36)
 
 			disconnectedPrompt.UIGradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, Color3.new(1.0, 1.0, 1.0)),
-				ColorSequenceKeypoint.new(1, Color3.new(0.9137255, 0.403922, 0.16470600000000002))
+				ColorSequenceKeypoint.new(0, Color3.new(0,0,0)),
+				ColorSequenceKeypoint.new(1, Color3.new(0.0862745, 0.596078, 0.835294))
 			})
 		elseif disconnectType == "network" then
 			disconnectedPrompt.Content.Text = "You've lost connection, would you like to rejoin?"
@@ -4533,8 +4521,8 @@ while task.wait(1) do
 			disconnectedPrompt.Action.Size = UDim2.new(0, 82, 0, 36)
 
 			disconnectedPrompt.UIGradient.Color = ColorSequence.new({
-				ColorSequenceKeypoint.new(0, Color3.new(1.0, 1.0, 1.0)),
-				ColorSequenceKeypoint.new(1, Color3.new(0.13725500000000002, 0.498039, 0.9137255))
+				ColorSequenceKeypoint.new(0, Color3.new(0,0,0)),
+				ColorSequenceKeypoint.new(1, Color3.new(0.862745, 0.501961, 0.0862745))
 			})
 		end
 
@@ -4590,4 +4578,4 @@ while task.wait(1) do
 			siriusValues.frameProfile.frameNotificationCooldown -= 1
 		end
 	end
-end
+e
